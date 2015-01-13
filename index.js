@@ -151,10 +151,19 @@ Cellophane.prototype.last = function(n) {
   return new Cellophane(this.array.slice(len - n));
 };
 
-Cellophane.prototype.fold = Cellophane.prototype.reduce = function(fn, acc) {
+Cellophane.prototype.fold = Cellophane.prototype.foldl = Cellophane.prototype.reduce = function(fn, acc) {
   this.each(function(val, i, array) {
     acc = fn(acc, array[i], i, array);
   });
+  return isArray(acc) ? new Cellophane(acc) : acc;
+};
+
+Cellophane.prototype.foldr = function(fn, acc) {
+  var array = this.array;
+  var i = array.length;
+  while (i--) {
+    acc = fn(acc, array[i], i, array);
+  }
   return isArray(acc) ? new Cellophane(acc) : acc;
 };
 
