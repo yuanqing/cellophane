@@ -297,6 +297,16 @@ Cellophane.prototype.sort = function(a, b) {
   return new Cellophane(result);
 };
 
+Cellophane.prototype.unique = function() {
+  var result = [];
+  this.each(function(val) {
+    if (result.indexOf(val) === -1) {
+      result.push(val);
+    }
+  });
+  return new Cellophane(result);
+};
+
 Cellophane.prototype.unwrap = function() {
   return this.array.slice(0);
 };
