@@ -3,9 +3,10 @@
 var deepEqual = require('deep-equal');
 var get = require('jaunt').get;
 var versus = require('versus');
+var isArray = require('cheque').isArray;
 
 var Cellophane = function(array) {
-  if (!Array.isArray(array)) {
+  if (!isArray(array)) {
     throw new Error('need an array');
   }
   if (!(this instanceof Cellophane)) {
@@ -154,7 +155,7 @@ Cellophane.prototype.fold = Cellophane.prototype.reduce = function(fn, acc) {
   this.each(function(val, i, array) {
     acc = fn(acc, array[i], i, array);
   });
-  return Array.isArray(acc) ? new Cellophane(acc) : acc;
+  return isArray(acc) ? new Cellophane(acc) : acc;
 };
 
 Cellophane.prototype.get = function(i) {
