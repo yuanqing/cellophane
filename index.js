@@ -144,14 +144,6 @@ Cellophane.prototype.first = function(n) {
   return new Cellophane(this.array.slice(0, n));
 };
 
-Cellophane.prototype.last = function(n) {
-  var len = this.array.length;
-  if (n == null) {
-    return this.array[len-1];
-  }
-  return new Cellophane(this.array.slice(len - n));
-};
-
 Cellophane.prototype.fold =
 Cellophane.prototype.foldl =
 Cellophane.prototype.reduce = function(fn, acc) {
@@ -196,6 +188,14 @@ Cellophane.prototype.indexOf = function(obj, opts) {
     });
   }
   return result;
+};
+
+Cellophane.prototype.last = function(n) {
+  var len = this.array.length;
+  if (n == null) {
+    return this.array[len-1];
+  }
+  return new Cellophane(this.array.slice(len - n));
 };
 
 Cellophane.prototype.limit = function(n) {
