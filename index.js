@@ -48,6 +48,12 @@ Cellophane.prototype.any = function(a, b, c) {
   return result;
 };
 
+Cellophane.prototype.compact = function() {
+  return this.filter(function(val) {
+    return val;
+  });
+};
+
 Cellophane.prototype.contains = function(obj, opts) {
   return this.indexOf(obj, opts) !== -1;
 };
