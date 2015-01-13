@@ -59,7 +59,8 @@ Cellophane.prototype.contains = function(obj, opts) {
   return this.indexOf(obj, opts) !== -1;
 };
 
-Cellophane.prototype.each = Cellophane.prototype.forEach = function(fn) {
+Cellophane.prototype.each =
+Cellophane.prototype.forEach = function(fn) {
   var array = this.array;
   var i = -1;
   var len = array.length;
@@ -151,7 +152,9 @@ Cellophane.prototype.last = function(n) {
   return new Cellophane(this.array.slice(len - n));
 };
 
-Cellophane.prototype.fold = Cellophane.prototype.foldl = Cellophane.prototype.reduce = function(fn, acc) {
+Cellophane.prototype.fold =
+Cellophane.prototype.foldl =
+Cellophane.prototype.reduce = function(fn, acc) {
   this.each(function(val, i, array) {
     acc = fn(acc, array[i], i, array);
   });
@@ -207,7 +210,9 @@ Cellophane.prototype.map = function(fn) {
   return new Cellophane(result);
 };
 
-Cellophane.prototype.max = Cellophane.prototype.maximum = function(key) {
+Cellophane.prototype.max =
+Cellophane.prototype.maximum =
+Cellophane.prototype.largest = function(key) {
   var array = this.array;
   var i = 0;
   var len = array.length;
@@ -236,7 +241,9 @@ Cellophane.prototype.max = Cellophane.prototype.maximum = function(key) {
   return max;
 };
 
-Cellophane.prototype.min = Cellophane.prototype.minimum = function(key) {
+Cellophane.prototype.min =
+Cellophane.prototype.minimum =
+Cellophane.prototype.smallest = function(key) {
   var array = this.array;
   var i = 0;
   var len = array.length;
@@ -275,11 +282,13 @@ Cellophane.prototype.reverse = function() {
   return new Cellophane(result);
 };
 
-Cellophane.prototype.size = Cellophane.prototype.length = function() {
+Cellophane.prototype.size =
+Cellophane.prototype.length = function() {
   return this.array.length;
 };
 
-Cellophane.prototype.slice = Cellophane.prototype.subarray = function(i, j) {
+Cellophane.prototype.slice =
+Cellophane.prototype.subarray = function(i, j) {
   return new Cellophane(this.array.slice(i, j));
 };
 
