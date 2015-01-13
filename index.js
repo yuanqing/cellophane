@@ -296,11 +296,11 @@ Cellophane.prototype.sort = function(fn) {
   return new Cellophane(this.array.slice(0).sort(fn));
 };
 
-Cellophane.prototype.sortBy = function(key, order) {
+Cellophane.prototype.sortBy = function(key, opts) {
   return new Cellophane(this.array.slice(0).sort(function(x, y) {
     x = get(x, key);
     y = get(y, key);
-    if (order === 'desc') {
+    if (opts && opts.order === 'desc') {
       var temp = x;
       x = y;
       y = temp;

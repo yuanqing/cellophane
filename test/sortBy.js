@@ -50,7 +50,7 @@ test('sortBy(key, order)', function(t) {
         { foo: { bar: 2 } }
       ];
       var original = cellophane(array);
-      var result = original.sortBy('foo.bar', 'desc');
+      var result = original.sortBy('foo.bar', { order: 'desc' });
       t.looseEqual(result.array, [
         { foo: { bar: 3 } },
         { foo: { bar: 2 } },
@@ -104,7 +104,7 @@ test('sortBy(key, order)', function(t) {
         { foo: { bar: 'b' } }
       ];
       var original = cellophane(array);
-      var result = original.sortBy('foo.bar', 'desc');
+      var result = original.sortBy('foo.bar', { order: 'desc' });
       t.looseEqual(result.array, [
         { foo: { bar: 'c' } },
         { foo: { bar: 'b' } },
