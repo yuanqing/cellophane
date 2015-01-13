@@ -292,28 +292,24 @@ Cellophane.prototype.subarray = function(i, j) {
   return new Cellophane(this.array.slice(i, j));
 };
 
-Cellophane.prototype.sort = function(a, b) {
-  var result = this.array.slice(0);
-  if (typeof a === 'function') {
-    // sort(fn)
-    result.sort(a);
-  } else {
-    // sort(key, order)
-    result.sort(function(x, y) {
-      x = get(x, a);
-      y = get(y, a);
-      if (b === 'desc') {
-        var temp = x;
-        x = y;
-        y = temp;
-      }
-      if (typeof x === 'string' && typeof y === 'string') {
-        return x.localeCompare(y);
-      }
-      return x > y ? 1 : -1;
-    });
-  }
-  return new Cellophane(result);
+Cellophane.prototype.sort = function(fn) {
+  return new Cellophane(this.array.slice(0).sort(fn));
+};
+
+Cellophane.prototype.sortBy = function(key, order) {
+  return new Cellophane(this.array.slice(0).sort(function(x, y) {
+    x = get(x, key);
+    y = get(y, key);
+    if (order === 'desc') {
+      var temp = x;
+      x = y;
+      y = temp;
+    }
+    if (typeof x === 'string' && typeof y === 'string') {
+      return x.localeCompare(y);
+    }
+    return x > y ? 1 : -1;
+  }));
 };
 
 Cellophane.prototype.unique = function() {
