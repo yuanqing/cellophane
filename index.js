@@ -6,7 +6,7 @@ var versus = require('versus');
 
 var Cellophane = function(array) {
   if (!Array.isArray(array)) {
-    throw new Error('expecting an array');
+    throw new Error('need an array');
   }
   if (!(this instanceof Cellophane)) {
     return new Cellophane(array);
@@ -127,6 +127,21 @@ Cellophane.prototype.filter = function(a, b, c) {
     break;
   }
   return new Cellophane(result);
+};
+
+Cellophane.prototype.first = function(n) {
+  if (n == null) {
+    return this.array[0];
+  }
+  return new Cellophane(this.array.slice(0, n));
+};
+
+Cellophane.prototype.last = function(n) {
+  var len = this.array.length;
+  if (n == null) {
+    return this.array[len-1];
+  }
+  return new Cellophane(this.array.slice(len - n));
 };
 
 Cellophane.prototype.fold = Cellophane.prototype.reduce = function(fn, acc) {
