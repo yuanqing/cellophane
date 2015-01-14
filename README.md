@@ -16,7 +16,7 @@ console.log(original.array); //=> [{ foo: 1 }, { foo: 2 }, { foo: 3 }]
 
 ### All methods return a *copy*
 
-Each Cellophane object is designed to be *immutable*. So, for any method that returns a Cellophane object, it is actually a *copy* of the original Cellophane object that is returned:
+Each Cellophane object is designed to be *immutable*. So, for all methods (other than [`each`](#eachfn)) that returns a Cellophane object, it is actually a *copy* of the original Cellophane object that is returned:
 
 ```js
 var filtered = original.filter('foo', '>', 1);
@@ -65,7 +65,7 @@ See [Versus.js](https://github.com/yuanqing/versus).
 
 ### Accessing nested properties
 
-In the [`any`](#anykey-op-val), [`every`](#everykey-op-val), [`filter`](#filterkey-op-val), and [`sortBy`](#sortBykey--opts) methods, access a nested object property by specifying a dot-delimited path as the `key`. For example:
+In the [`any`](#anykey-op-val), [`every`](#everykey-op-val), [`filter`](#filterkey-op-val), and [`sortBy`](#sortbykey--opts) methods, access a nested object property by specifying a dot-delimited path as the `key`. For example:
 
 ```js
 cellophane([
@@ -79,7 +79,7 @@ See [Jaunt.js](https://github.com/yuanqing/jaunt#jauntgetobj-path).
 
 ## API
 
-- [`cellophane(array)`](#any)
+- [`cellophane(array)`](#cellophanearray)
 - [`.any(fn)`](#anyfn)
 - [`.any(op, val)`](#anyop-val)
 - [`.any(key, op, val)`](#anykey-op-val)
@@ -94,7 +94,7 @@ See [Jaunt.js](https://github.com/yuanqing/jaunt#jauntgetobj-path).
 - [`.filter(key, op, val)`](#filterkey-op-val)
 - [`.first([n])`](#firstn)
 - [`.fold(fn, acc)`](#foldfn-acc)
-- [`.foldr(fn, acc)`](#foldrrfn-acc)
+- [`.foldr(fn, acc)`](#foldrfn-acc)
 - [`.get(i)`](#geti)
 - [`.indexOf(obj [, opts])`](#indexofobj--opts)
 - [`.last([n])`](#lastn)
@@ -104,10 +104,11 @@ See [Jaunt.js](https://github.com/yuanqing/jaunt#jauntgetobj-path).
 - [`.min([key])`](#minkey)
 - [`.reverse()`](#reverse)
 - [`.size()`](#size)
-- [`.slice()`](#slice)
+- [`.slice(i [, j])`](#slicei--j)
 - [`.sort(fn)`](#sortfn)
-- [`.sortBy(key [, opts])`](#sortBykey--opts)
-- [`.unique()`](#unique)
+- [`.sort([opts])`](#sortopts)
+- [`.sortBy(key [, opts])`](#sortbykey--opts)
+- [`.unique([opts])`](#uniqueopts)
 - [`.unwrap()`](#unwrap)
 
 ### cellophane(array)
@@ -397,7 +398,7 @@ cellophane([
 ]).max('foo'); //=> { foo: 3 }
 ```
 
-### .min(key)
+### .min([key])
 
 Returns the smallest object in the array. If `key` was specified, compares the objects based on the value corresponding to `key`. `key` can be [a dot-delimited path](#accessing-nested-properties).
 
