@@ -296,6 +296,18 @@ Cellophane.prototype.prepend = function(obj) {
   return new Cellophane(result);
 };
 
+Cellophane.prototype.remove = function(obj, opts) {
+  return this.filter(opts && opts.strict ? '!==' : '!=', obj);
+};
+
+Cellophane.prototype.removeAt = function(i) {
+  var result = this.array.slice();
+  if (i >= this.array.length * -1) {
+    result.splice(i, 1);
+  }
+  return new Cellophane(result);
+};
+
 Cellophane.prototype.reverse = function() {
   var array = this.array;
   var i = array.length;
