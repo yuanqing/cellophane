@@ -292,9 +292,25 @@ Cellophane.prototype.subarray = function(i, j) {
   return new Cellophane(this.array.slice(i, j));
 };
 
-Cellophane.prototype.sort = function(fn) {
-  return new Cellophane(this.array.slice(0).sort(fn));
-};
+Cellophane.prototype.sort = (function() {
+  var ascFn = function(a, b) {
+    return a < b ? -1 : 1;
+  };
+  var descFn = function(a, b) {
+    return a > b ? -1 : 1;
+  };
+  return function(a) {
+    var result = this.array.slice(0);
+    if (typeof a === 'function') {
+      // sort(fn)
+      result.sort(a);
+    } else {
+      // sort(opts)
+      result.sort(a && a.order === 'desc' ? descFn : ascFn);
+    }
+    return new Cellophane(result);
+  };
+})();
 
 Cellophane.prototype.sortBy = function(key, opts) {
   return new Cellophane(this.array.slice(0).sort(function(x, y) {
