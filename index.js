@@ -317,18 +317,18 @@ Cellophane.prototype.sort = (function() {
 })();
 
 Cellophane.prototype.sortBy = function(key, opts) {
-  return new Cellophane(this.array.slice(0).sort(function(x, y) {
-    x = get(x, key);
-    y = get(y, key);
+  return new Cellophane(this.array.slice(0).sort(function(a, b) {
+    a = get(a, key);
+    b = get(b, key);
     if (opts && opts.order === 'desc') {
-      var temp = x;
-      x = y;
-      y = temp;
+      var temp = a;
+      a = b;
+      b = temp;
     }
-    if (typeof x === 'string' && typeof y === 'string') {
-      return x.localeCompare(y);
+    if (typeof a === 'string' && typeof b === 'string') {
+      return a.localeCompare(b);
     }
-    return x > y ? 1 : -1;
+    return a < b ? -1 : 1;
   }));
 };
 
