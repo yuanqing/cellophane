@@ -69,6 +69,14 @@ Cellophane.prototype.any = function(a, b, c) {
   return result;
 };
 
+Cellophane.prototype.append =
+Cellophane.prototype.add =
+Cellophane.prototype.push = function(obj) {
+  var result = this.array.slice();
+  result.push(obj);
+  return new Cellophane(result);
+};
+
 Cellophane.prototype.compact = function() {
   return this.filter(function(val) {
     return val;
@@ -194,6 +202,12 @@ Cellophane.prototype.indexOf = function(obj, opts) {
   return (opts && opts.strict === true ? indexOfStrict : indexOf)(this.array, obj);
 };
 
+Cellophane.prototype.insert = function(obj, i) {
+  var result = this.array.slice();
+  result.splice(i, 0, obj);
+  return new Cellophane(result);
+};
+
 Cellophane.prototype.last = function(n) {
   var len = this.array.length;
   if (n == null) {
@@ -274,6 +288,12 @@ Cellophane.prototype.smallest = function(key) {
     }
   }
   return min;
+};
+
+Cellophane.prototype.prepend = function(obj) {
+  var result = this.array.slice();
+  result.unshift(obj);
+  return new Cellophane(result);
 };
 
 Cellophane.prototype.reverse = function() {
