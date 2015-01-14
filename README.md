@@ -82,6 +82,7 @@ See [Jaunt.js](https://github.com/yuanqing/jaunt#jauntgetobj-path).
 - [`.any(fn)`](#anyfn)
 - [`.any(op, val)`](#anyop-val)
 - [`.any(key, op, val)`](#anykey-op-val)
+- [`.append(obj)`](#appendobj)
 - [`.compact()`](#compact)
 - [`.contains(obj [, opts])`](#containsobj--opts)
 - [`.each(fn)`](#eachfn)
@@ -96,11 +97,15 @@ See [Jaunt.js](https://github.com/yuanqing/jaunt#jauntgetobj-path).
 - [`.foldr(fn, acc)`](#foldrfn-acc)
 - [`.get(i)`](#geti)
 - [`.indexOf(obj [, opts])`](#indexofobj--opts)
+- [`.insert(obj, i)`](#insertobj-i)
 - [`.last([n])`](#lastn)
 - [`.limit(n)`](#limitn)
 - [`.map(fn)`](#mapfn)
 - [`.max([key])`](#maxkey)
 - [`.min([key])`](#minkey)
+- [`.prepend(obj)`](#prependobj)
+- [`.remove(obj [, opts])`](#removeobj--opts)
+- [`.removeAt(i)`](#removeati)
 - [`.reverse()`](#reverse)
 - [`.size()`](#size)
 - [`.slice(i [, j])`](#slicei--j)
@@ -154,6 +159,16 @@ var c = cellophane([
 
 c.any('foo', '>', 1); //=> true
 c.any('foo', '>', 3); //=> false
+```
+
+### .append(obj)
+
+Adds `obj` to the end of the array, returning the result as a new Cellophane object.
+
+*Alias:* `add`, `push`
+
+```js
+cellophane([1, 2]).append(3); //=> cellophane([1, 2, 3])
 ```
 
 ### .compact()
@@ -347,6 +362,23 @@ c.indexOf(obj); //=> 1
 c.indexOf(obj, { strict: true }); //=> -1
 ```
 
+### .insert(obj, i)
+
+Inserts `obj` at index `i` of the array, returning the result as a new Cellophane object. If `i` is negative, indexing is from the *end* of the array (ie. index `-1` refers to the last object in the array, and so on). If `i` is beyond the bounds of the original array, the resulting array is &ldquo;expanded&rdquo; accordingly.
+
+```js
+var c = cellophane([1, 2, 3]);
+var obj = 'foo';
+
+c.insert(obj, 0); //=> cellophane([obj, 1, 2, 3])
+c.insert(obj, 3); //=> cellophane([1, 2, 3, obj])
+c.insert(obj, 4); //=> cellophane([1, 2, 3, undefined, obj])
+
+c.insert(obj, -1); //=> cellophane([1, 2, 3, obj])
+c.insert(obj, -4); //=> cellophane([obj, 1, 2, 3])
+c.insert(obj, -5); //=> cellophane([obj, undefined, 1, 2, 3])
+```
+
 ### .last([n])
 
 Returns the last object in the array. If `n` is specified, returns the last `n` objects of the array as a new Cellophane object.
@@ -411,6 +443,30 @@ cellophane([
   { foo: 2 },
   { foo: 3 }
 ]).min('foo'); //=> { foo: 1 }
+```
+
+### .prepend(obj)
+
+Adds `obj` to the start of the array, returning the result as a new Cellophane object.
+
+```js
+cellophane([2, 3]).prepend(1); //=> cellophane([1, 2, 3])
+```
+
+### .remove(obj [, opts])
+
+Removes all objects that are equal to `obj` from the array, returning the result as a new Cellophane object. Objects are [compared by value](https://github.com/substack/node-deep-equal). For strict comparison (ie. objects `a` and `b` are considered as equal if and only if `a === b`), set `opts.strict` to `true`.
+
+```js
+cellophane([1, 2, 3, 1]).remove(1); //=> cellophane([2, 3])
+```
+
+### .removeAt(i)
+
+Removes the object at index `i` of the array, returning the result as a new Cellophane object.
+
+```js
+cellophane([1, 2, 3]).removeAt(1); //=> cellophane([1, 3])
 ```
 
 ### .reverse()
