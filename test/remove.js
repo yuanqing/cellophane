@@ -1,7 +1,6 @@
 'use strict';
 
 var test = require('tape');
-var clone = require('clone');
 var cellophane = require('../');
 
 test('remove(obj, opts)', function(t) {
