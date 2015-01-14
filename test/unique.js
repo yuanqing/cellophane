@@ -17,7 +17,7 @@ test('unique()', function(t) {
     t.end();
   });
 
-  t.test('defaults to comparing by value', function(t) {
+  t.test('defaults to comparing by object value', function(t) {
     var array = [{ foo: 1 }, { foo: 1 }, { foo: 2 }];
     var original = cellophane(array);
     var result = original.unique();
@@ -29,7 +29,7 @@ test('unique()', function(t) {
     t.end();
   });
 
-  t.test('compare by object', function(t) {
+  t.test('use strict comparison by setting `opts.strict` to `true`', function(t) {
     var array = [{ foo: 1 }, { foo: 1 }, { foo: 2 }];
     var original = cellophane(array);
     var result = original.unique({ strict: true });

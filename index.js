@@ -191,7 +191,7 @@ Cellophane.prototype.get = function(i) {
 };
 
 Cellophane.prototype.indexOf = function(obj, opts) {
-  return (opts && opts.strict === false ? indexOf : indexOfStrict)(this.array, obj);
+  return (opts && opts.strict === true ? indexOfStrict : indexOf)(this.array, obj);
 };
 
 Cellophane.prototype.last = function(n) {
