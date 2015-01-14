@@ -203,8 +203,24 @@ Cellophane.prototype.indexOf = function(obj, opts) {
 };
 
 Cellophane.prototype.insert = function(obj, i) {
-  var result = this.array.slice();
-  result.splice(i, 0, obj);
+  var array = this.array;
+  var len = array.length;
+  var result;
+  if (i < 0) {
+    if (i < (len * -1) - 1) {
+      result = [].concat(obj, new Array((i + len + 1) * -1), array);
+    } else {
+      result = array.slice();
+      result.splice(i + len + 1, 0, obj);
+    }
+  } else {
+    if (i > len) {
+      result = [].concat(array, new Array(i - len), obj);
+    } else {
+      result = array.slice();
+      result.splice(i, 0, obj);
+    }
+  }
   return new Cellophane(result);
 };
 
