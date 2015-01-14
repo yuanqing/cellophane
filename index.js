@@ -15,6 +15,26 @@ var Cellophane = function(array) {
   this.array = array;
 };
 
+var indexOf = function(array, obj) {
+  var i = array.length;
+  while (i--) {
+    if (deepEqual(array[i], obj, { strict: true })) {
+      return i;
+    }
+  }
+  return -1;
+};
+
+var indexOfStrict = function(array, obj) {
+  var i = array.length;
+  while (i--) {
+    if (array[i] === obj) {
+      return i;
+    }
+  }
+  return -1;
+};
+
 Cellophane.prototype.any = function(a, b, c) {
   var result = false;
   switch (arguments.length) {
@@ -171,23 +191,7 @@ Cellophane.prototype.get = function(i) {
 };
 
 Cellophane.prototype.indexOf = function(obj, opts) {
-  var result = -1;
-  if (opts && opts.strict === false) {
-    this.each(function(val, i) {
-      if (deepEqual(val, obj)) {
-        result = i;
-        return false;
-      }
-    });
-  } else {
-    this.each(function(val, i) {
-      if (val === obj) {
-        result = i;
-        return false;
-      }
-    });
-  }
-  return result;
+  return (opts && opts.strict === false ? indexOf : indexOfStrict)(this.array, obj);
 };
 
 Cellophane.prototype.last = function(n) {
@@ -328,10 +332,11 @@ Cellophane.prototype.sortBy = function(key, opts) {
   }));
 };
 
-Cellophane.prototype.unique = function() {
+Cellophane.prototype.unique = function(opts) {
   var result = [];
+  var fn = opts && opts.strict ? indexOfStrict : indexOf;
   this.each(function(val) {
-    if (result.indexOf(val) === -1) {
+    if (fn(result, val) === -1) {
       result.push(val);
     }
   });
