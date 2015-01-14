@@ -45,8 +45,7 @@ For all methods that take an iterator `fn` (called over each object in the array
 - `i` &mdash; The index of the current object.
 - `array` &mdash; The Cellophane object&rsquo;s internal array.
 
-The exceptions are the [`fold`](#foldfn-acc) and [`foldr`](#foldrfn-acc) methods;the
-`fn` iterator takes an additional `acc` accumulator argument (before the `val` argument).
+The exceptions are the [`fold`](#foldfn-acc) and [`foldr`](#foldrfn-acc) methods; their `fn` iterator takes an additional `acc` accumulator argument.
 
 ### Operators for comparing values
 
@@ -61,7 +60,7 @@ In the [`any`](#anyop-val), [`every`](#everyop-val), and [`filter`](#filterop-va
 - `'<='`
 - `'>='`
 
-See [Versus.js](https://github.com/yuanqing/versus).
+See [Versus.js](https://github.com/yuanqing/versus#usage).
 
 ### Accessing nested properties
 
