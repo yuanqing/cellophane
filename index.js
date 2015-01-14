@@ -304,7 +304,7 @@ Cellophane.prototype.sort = (function() {
     return a > b ? -1 : 1;
   };
   return function(a) {
-    var result = this.array.slice(0);
+    var result = this.array.slice();
     if (typeof a === 'function') {
       // sort(fn)
       result.sort(a);
@@ -317,7 +317,7 @@ Cellophane.prototype.sort = (function() {
 })();
 
 Cellophane.prototype.sortBy = function(key, opts) {
-  return new Cellophane(this.array.slice(0).sort(function(a, b) {
+  return new Cellophane(this.array.slice().sort(function(a, b) {
     a = get(a, key);
     b = get(b, key);
     if (opts && opts.order === 'desc') {
@@ -344,7 +344,7 @@ Cellophane.prototype.unique = function(opts) {
 };
 
 Cellophane.prototype.unwrap = function() {
-  return this.array.slice(0);
+  return this.array.slice();
 };
 
 module.exports = Cellophane;
