@@ -11,7 +11,7 @@ test('min()', function(t) {
   });
 
   t.test('non-empty array', function(t) {
-    t.looseEqual(cellophane([3, 1, 2]).min(), 1);
+    t.looseEqual(cellophane([2, 1, 3]).min(), 1);
     t.end();
   });
 
@@ -27,9 +27,9 @@ test('min(key)', function(t) {
   t.test('non-empty array', function(t) {
     var obj = { foo: { bar: 1 } };
     t.equal(cellophane([
-      { foo: { bar: 3 } },
+      { foo: { bar: 2 } },
       obj,
-      { foo: { bar: 2 } }
+      { foo: { bar: 3 } }
     ]).min('foo.bar'), obj);
     t.end();
   });

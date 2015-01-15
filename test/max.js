@@ -11,7 +11,7 @@ test('max()', function(t) {
   });
 
   t.test('non-empty array', function(t) {
-    t.looseEqual(cellophane([3, 1, 2]).max(), 3);
+    t.looseEqual(cellophane([2, 1, 3]).max(), 3);
     t.end();
   });
 
@@ -27,9 +27,9 @@ test('max(key)', function(t) {
   t.test('non-empty array', function(t) {
     var obj = { foo: { bar: 3 } };
     t.equal(cellophane([
-      obj,
+      { foo: { bar: 2 } },
       { foo: { bar: 1 } },
-      { foo: { bar: 2 } }
+      obj
     ]).max('foo.bar'), obj);
     t.end();
   });
