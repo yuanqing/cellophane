@@ -9,19 +9,22 @@ test('map(fn)', function(t) {
   t.test('returns a copy', function(t) {
     var x = { foo: 1 };
     var y = { foo: 2 };
-    var array = [x, y];
+    var z = { foo: 3 };
+    var array = [x, y, z];
     var original = cellophane(array);
     var result = original.map(function(val) {
       return val;
     });
     // original
-    t.looseEqual(original.array, [{ foo: 1 }, { foo: 2 }]);
+    t.looseEqual(original.array, [{ foo: 1 }, { foo: 2 }, { foo: 3 }]);
     t.equal(original.array[0], x);
     t.equal(original.array[1], y);
+    t.equal(original.array[2], z);
     // result
-    t.looseEqual(result.array, [{ foo: 1 }, { foo: 2 }]);
+    t.looseEqual(result.array, [{ foo: 1 }, { foo: 2 }, { foo: 3 }]);
     t.equal(result.array[0], x);
     t.equal(result.array[1], y);
+    t.equal(result.array[2], z);
     // original !== result
     t.notEqual(original, result);
     t.notEqual(original.array, result.array);

@@ -8,16 +8,19 @@ test('insert(obj, i)', function(t) {
   t.test('returns a copy', function(t) {
     var x = { foo: 1 };
     var y = { foo: 2 };
-    var array = [x];
+    var z = { foo: 3 };
+    var array = [x, z];
     var original = cellophane(array);
-    var result = original.add(y);
+    var result = original.insert(y, 1);
     // original
-    t.looseEqual(original.array, [{ foo: 1 }]);
+    t.looseEqual(original.array, [{ foo: 1 }, { foo: 3 }]);
     t.equal(original.array[0], x);
+    t.equal(original.array[1], z);
     // result
-    t.looseEqual(result.array, [{ foo: 1 }, { foo: 2 }]);
+    t.looseEqual(result.array, [{ foo: 1 }, { foo: 2 }, { foo: 3 }]);
     t.equal(result.array[0], x);
     t.equal(result.array[1], y);
+    t.equal(result.array[2], z);
     // original !== result
     t.notEqual(original, result);
     t.notEqual(original.array, result.array);
