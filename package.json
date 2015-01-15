@@ -1,7 +1,7 @@
 {
   "name": "cellophane",
   "version": "0.0.0",
-  "description": "A lightweight wrapper around the array.",
+  "description": "A lightweight wrapper for arrays.",
   "author": "Lim Yuan Qing",
   "license": "MIT",
   "repository": {
