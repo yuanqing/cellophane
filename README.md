@@ -219,9 +219,9 @@ c.every('foo', '<', 3); //=> false
 Filters the array using the [`fn` iterator](#iterator-function-signature), returning the filtered result as a new Cellophane object.
 
 ```js
-cellophane([0, 1, 2, 3]).filter(function(val, i, array) {
-  return val > 0;
-}); //=> cellophane([1, 2, 3])
+cellophane([1, 2, 3]).filter(function(val, i, array) {
+  return val > 1;
+}); //=> cellophane([2, 3])
 ```
 
 <sup>[&#8617;](#methods)</sup>
@@ -231,7 +231,7 @@ cellophane([0, 1, 2, 3]).filter(function(val, i, array) {
 Filters the array. Objects that return `true` when compared with `val` using the [`op` operator](#operators-for-comparing-values) will be included in the filtered result. Returns the filtered result as a new Cellophane object.
 
 ```js
-cellophane([0, 1, 2, 3]).filter('>', 0); //=> cellophane([1, 2, 3])
+cellophane([1, 2, 3]).filter('>', 1); //=> cellophane([2, 3])
 ```
 
 <sup>[&#8617;](#methods)</sup>
@@ -242,13 +242,11 @@ Filters the array. Objects whose value at `key` returns `true` when compared wit
 
 ```js
 cellophane([
-  { foo: 0 },
   { foo: 1 },
   { foo: 2 },
   { foo: 3 }
-]).filter('foo', '>', 0);
+]).filter('foo', '>', 1);
 //=> cellophane([
-//     { foo: 1 },
 //     { foo: 2 },
 //     { foo: 3 }
 //   ])
@@ -512,7 +510,7 @@ Takes a [slice](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/G
 *Alias:* `subarray`
 
 ```js
-cellophane([1, 2, 3]).slice(1, 2); //=> cellophane([2, 3])
+cellophane([1, 2, 3]).slice(1, 3); //=> cellophane([2, 3])
 ```
 
 <sup>[&#8617;](#methods)</sup>
