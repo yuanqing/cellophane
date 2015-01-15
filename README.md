@@ -50,7 +50,7 @@
 
 ### cellophane([array])
 
-Constructs a new Cellophane object. If `array` was specified, initialises the Cellophane object&rsquo;s &ldquo;internal&rdquo; array to `array`.
+Constructs a new Cellophane object. If `array` was specified, sets the Cellophane object&rsquo;s &ldquo;internal&rdquo; array to `array`. Throws if `array` is not an array.
 
 ```js
 var a = cellophane();
