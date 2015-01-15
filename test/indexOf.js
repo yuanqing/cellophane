@@ -6,39 +6,32 @@ var cellophane = require('../');
 test('indexOf(obj, opts)', function(t) {
 
   t.test('empty array', function(t) {
-    var array = [];
-    var original = cellophane(array);
-    t.equal(original.indexOf({ foo: 1 }), -1);
-    t.equal(original.indexOf({ foo: 1 }, { strict: false }), -1);
-    t.looseEqual(original.array, []);
-    t.equal(original.array, array);
+    t.equal(cellophane().indexOf({ foo: 3 }), -1);
     t.end();
   });
 
   t.test('defaults to comparing by object value', function(t) {
-    var obj = { foo: 2 };
-    var array = [{ foo: 1 }, obj, { foo: 3 }];
-    var original = cellophane(array);
-    t.equal(original.indexOf('bar'), -1);
-    t.equal(original.indexOf({ foo: 2 }), 1);
-    t.equal(original.indexOf(obj), 1);
-    t.looseEqual(original.array, [{ foo: 1 }, { foo: 2 }, { foo: 3 }]);
-    t.equal(original.array, array);
+    var c = cellophane([
+      { foo: 1 },
+      { foo: 2 },
+      { foo: 3 }
+    ]);
+    t.equal(c.indexOf({ foo: 3 }), 2);
+    t.equal(c.indexOf({ foo: 4 }), -1);
     t.end();
   });
 
   t.test('use strict comparison by setting `opts.strict` to `true`', function(t) {
-    var obj = { foo: 2 };
-    var array = [{ foo: 1 }, obj, { foo: 3 }];
-    var original = cellophane(array);
-    t.equal(original.indexOf('bar', { strict: true }), -1);
-    t.equal(original.indexOf({ foo: 2 }, { strict: true }), -1);
-    t.equal(original.indexOf(obj, { strict: true }), 1);
-    t.looseEqual(original.array, [{ foo: 1 }, { foo: 2 }, { foo: 3 }]);
-    t.equal(original.array, array);
+    var obj = { foo: 3 };
+    var c = cellophane([
+      { foo: 1 },
+      { foo: 2 },
+      obj
+    ]);
+    t.equal(c.indexOf(obj, { strict: true }), 2);
+    t.equal(c.indexOf({ foo: 3 }, { strict: true }), -1);
+    t.equal(c.indexOf({ foo: 4 }, { strict: true }), -1);
     t.end();
   });
-
-  t.end();
 
 });

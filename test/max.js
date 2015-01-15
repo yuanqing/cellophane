@@ -5,61 +5,33 @@ var cellophane = require('../');
 
 test('max()', function(t) {
 
-  test('empty array', function(t) {
-    var array = [];
-    var original = cellophane(array);
-    var result = original.max();
-    t.looseEqual(result, undefined);
-    t.looseEqual(original.array, []);
-    t.equal(original.array, array);
+  t.test('empty array', function(t) {
+    t.looseEqual(cellophane().max(), undefined);
     t.end();
   });
 
-  test('non-empty array', function(t) {
-    var array = [2, 1, 3];
-    var original = cellophane(array);
-    var result = original.max();
-    t.looseEqual(result, 3);
-    t.looseEqual(original.array, [2, 1, 3]);
-    t.equal(original.array, array);
+  t.test('non-empty array', function(t) {
+    t.looseEqual(cellophane([2, 1, 3]).max(), 3);
     t.end();
   });
-
-  t.end();
 
 });
 
 test('max(key)', function(t) {
 
-  test('empty array', function(t) {
-    var array = [];
-    var original = cellophane(array);
-    var result = original.max('foo.bar');
-    t.looseEqual(result, undefined);
-    t.looseEqual(original.array, []);
-    t.equal(original.array, array);
+  t.test('empty array', function(t) {
+    t.looseEqual(cellophane().max('foo.bar'), undefined);
     t.end();
   });
 
-  test('non-empty array', function(t) {
+  t.test('non-empty array', function(t) {
     var obj = { foo: { bar: 3 } };
-    var array = [
+    t.equal(cellophane([
       { foo: { bar: 2 } },
       { foo: { bar: 1 } },
       obj
-    ];
-    var original = cellophane(array);
-    var result = original.max('foo.bar');
-    t.looseEqual(result, obj);
-    t.looseEqual(original.array, [
-      { foo: { bar: 2 } },
-      { foo: { bar: 1 } },
-      { foo: { bar: 3 } }
-    ]);
-    t.equal(original.array, array);
+    ]).max('foo.bar'), obj);
     t.end();
   });
-
-  t.end();
 
 });

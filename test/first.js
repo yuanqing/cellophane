@@ -6,65 +6,49 @@ var cellophane = require('../');
 test('first()', function(t) {
 
   t.test('empty array', function(t) {
-    var array = [];
-    var original = cellophane(array);
-    t.equal(original.first(), undefined);
-    t.looseEqual(original.array, []);
-    t.equal(original.array, array);
+    t.looseEqual(cellophane().first(), undefined);
     t.end();
   });
 
   t.test('non-empty array', function(t) {
-    var array = [1, 2, 3];
-    var original = cellophane(array);
-    t.equal(original.first(), 1);
-    t.looseEqual(original.array, [1, 2, 3]);
-    t.equal(original.array, array);
+    t.looseEqual(cellophane([1, 2, 3]).first(), 1);
     t.end();
   });
-
-  t.end();
 
 });
 
 test('first(n)', function(t) {
 
-  t.test('empty array', function(t) {
-    var array = [];
-    var original = cellophane(array);
-    var result = original.first(10);
-    t.looseEqual(result.array, []);
-    t.looseEqual(original.array, []);
-    t.equal(original.array, array);
-    t.notEqual(original, result);
-    t.notEqual(original.array, result.array);
-    t.end();
-  });
-
-  t.test('`n` smaller than array size', function(t) {
-    var array = [1, 2, 3];
+  t.test('returns a copy', function(t) {
+    var x = { foo: 1 };
+    var y = { foo: 2 };
+    var z = { foo: 3 };
+    var array = [x, y, z];
     var original = cellophane(array);
     var result = original.first(2);
-    t.looseEqual(result.array, [1, 2]);
-    t.looseEqual(original.array, [1, 2, 3]);
-    t.equal(original.array, array);
+    // original
+    t.looseEqual(original.array, [{ foo: 1 }, { foo: 2 }, { foo: 3 }]);
+    t.equal(original.array[0], x);
+    t.equal(original.array[1], y);
+    t.equal(original.array[2], z);
+    // result
+    t.looseEqual(result.array, [{ foo: 1 }, { foo: 2 }]);
+    t.equal(result.array[0], x);
+    t.equal(result.array[1], y);
+    // original !== result
     t.notEqual(original, result);
     t.notEqual(original.array, result.array);
     t.end();
   });
 
-  t.test('`n` larger than array size', function(t) {
-    var array = [1, 2, 3];
-    var original = cellophane(array);
-    var result = original.first(10);
-    t.looseEqual(result.array, [1, 2, 3]);
-    t.looseEqual(original.array, [1, 2, 3]);
-    t.equal(original.array, array);
-    t.notEqual(original, result);
-    t.notEqual(original.array, result.array);
+  t.test('empty array', function(t) {
+    t.looseEqual(cellophane().first(2).array, []);
     t.end();
   });
 
-  t.end();
+  t.test('non-empty array', function(t) {
+    t.looseEqual(cellophane([1, 2, 3]).first(2).array, [1, 2]);
+    t.end();
+  });
 
 });

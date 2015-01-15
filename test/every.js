@@ -8,24 +8,18 @@ test('every(fn)', function(t) {
 
   t.test('empty array', function(t) {
     var args = [];
-    var array = [];
-    var original = cellophane(array);
-    var result = original.every(function(val, i, array) {
+    var result = cellophane().every(function(val, i, array) {
       args.push(clone([val, i, array]));
-      return val < 3;
+      return val < 4;
     });
     t.looseEqual(args, []);
     t.equal(result, true);
-    t.looseEqual(original.array, []);
-    t.equal(original.array, array);
     t.end();
   });
 
   t.test('false result', function(t) {
     var args = [];
-    var array = [1, 2, 3];
-    var original = cellophane(array);
-    var result = original.every(function(val, i, array) {
+    var result = cellophane([1, 2, 3]).every(function(val, i, array) {
       args.push(clone([val, i, array]));
       return val < 3;
     });
@@ -35,18 +29,14 @@ test('every(fn)', function(t) {
       [3, 2, [1, 2, 3]]
     ]);
     t.equal(result, false);
-    t.looseEqual(original.array, [1, 2, 3]);
-    t.equal(original.array, array);
     t.end();
   });
 
   t.test('true result', function(t) {
     var args = [];
-    var array = [1, 2, 3];
-    var original = cellophane(array);
-    var result = original.every(function(val, i, array) {
+    var result = cellophane([1, 2, 3]).every(function(val, i, array) {
       args.push(clone([val, i, array]));
-      return val > 0;
+      return val < 4;
     });
     t.looseEqual(args, [
       [1, 0, [1, 2, 3]],
@@ -54,99 +44,53 @@ test('every(fn)', function(t) {
       [3, 2, [1, 2, 3]]
     ]);
     t.equal(result, true);
-    t.looseEqual(original.array, [1, 2, 3]);
-    t.equal(original.array, array);
     t.end();
   });
-
-  t.end();
 
 });
 
 test('every(op, val)', function(t) {
 
   t.test('empty array', function(t) {
-    var array = [];
-    var original = cellophane(array);
-    var result = original.every('<', 3);
-    t.equal(result, true);
-    t.looseEqual(original.array, []);
-    t.equal(original.array, array);
+    t.equal(cellophane().every('<', 4), true);
     t.end();
   });
 
   t.test('false result', function(t) {
-    var array = [1, 2, 3];
-    var original = cellophane(array);
-    var result = original.every('<', 3);
-    t.equal(result, false);
-    t.looseEqual(original.array, [1, 2, 3]);
-    t.equal(original.array, array);
+    t.equal(cellophane([1, 2, 3]).every('<', 3), false);
     t.end();
   });
 
   t.test('true result', function(t) {
-    var array = [1, 2, 3];
-    var original = cellophane(array);
-    var result = original.every('>', 0);
-    t.equal(result, true);
-    t.looseEqual(original.array, [1, 2, 3]);
-    t.equal(original.array, array);
+    t.equal(cellophane([1, 2, 3]).every('<', 4), true);
     t.end();
   });
-
-  t.end();
 
 });
 
 test('every(key, op, val)', function(t) {
 
   t.test('empty array', function(t) {
-    var array = [];
-    var original = cellophane(array);
-    var result = original.every('foo.bar', '<', 3);
-    t.equal(result, true);
-    t.looseEqual(original.array, []);
-    t.equal(original.array, array);
+    t.equal(cellophane().every('foo.bar', '<', 4), true);
     t.end();
   });
 
   t.test('false result', function(t) {
-    var array = [
+    t.equal(cellophane([
       { foo: { bar: 1 } },
       { foo: { bar: 2 } },
       { foo: { bar: 3 } }
-    ];
-    var original = cellophane(array);
-    var result = original.every('foo.bar', '<', 3);
-    t.equal(result, false);
-    t.looseEqual(original.array, [
-      { foo: { bar: 1 } },
-      { foo: { bar: 2 } },
-      { foo: { bar: 3 } }
-    ]);
-    t.equal(original.array, array);
+    ]).every('foo.bar', '<', 3), false);
     t.end();
   });
 
   t.test('true result', function(t) {
-    var array = [
+    t.equal(cellophane([
       { foo: { bar: 1 } },
       { foo: { bar: 2 } },
       { foo: { bar: 3 } }
-    ];
-    var original = cellophane(array);
-    var result = original.every('foo.bar', '>', 0);
-    t.equal(result, true);
-    t.looseEqual(original.array, [
-      { foo: { bar: 1 } },
-      { foo: { bar: 2 } },
-      { foo: { bar: 3 } }
-    ]);
-    t.equal(original.array, array);
+    ]).every('foo.bar', '<', 4), true);
     t.end();
   });
-
-  t.end();
 
 });

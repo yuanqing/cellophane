@@ -8,6 +8,7 @@ test('cellophane()', function(t) {
   t.test('creates a cellophane object', function(t) {
     var c = cellophane();
     t.true(c instanceof cellophane);
+    t.looseEqual(c.array, []);
     t.end();
   });
 
@@ -15,13 +16,15 @@ test('cellophane()', function(t) {
 
 test('cellophane(array)', function(t) {
 
-  t.test('creates a cellophane object', function(t) {
-    var c = cellophane([]);
+  t.test('sets the "internal" array to `array`', function(t) {
+    var array = [{ foo: 1 }];
+    var c = cellophane(array);
     t.true(c instanceof cellophane);
+    t.equal(c.array, array);
     t.end();
   });
 
-  t.test('throws if not passed an array', function(t) {
+  t.test('throws if `array` is not an array', function(t) {
     t.throws(function() {
       cellophane({});
     });

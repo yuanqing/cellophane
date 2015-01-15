@@ -6,23 +6,24 @@ var cellophane = require('../');
 
 test('each(fn)', function(t) {
 
+  t.test('returns the original object', function(t) {
+    var original = cellophane([1, 2, 3]);
+    t.equal(original, original.each(function() {}));
+    t.end();
+  });
+
   t.test('empty array', function(t) {
     var args = [];
-    var array = [];
-    var original = cellophane(array);
-    var result = original.each(function(val, i, array) {
+    cellophane().each(function(val, i, array) {
       args.push(clone([val, i, array]));
     });
     t.looseEqual(args, []);
-    t.looseEqual(original.array, []);
-    t.equal(original, result);
     t.end();
   });
 
   t.test('non-empty array', function(t) {
     var args = [];
-    var original = cellophane([1, 2, 3]);
-    var result = original.each(function(val, i, array) {
+    cellophane([1, 2, 3]).each(function(val, i, array) {
       args.push(clone([val, i, array]));
     });
     t.looseEqual(args, [
@@ -30,15 +31,12 @@ test('each(fn)', function(t) {
       [2, 1, [1, 2, 3]],
       [3, 2, [1, 2, 3]]
     ]);
-    t.looseEqual(original.array, [1, 2, 3]);
-    t.equal(original, result);
     t.end();
   });
 
-  t.test('breaks on returning `false`', function(t) {
+  t.test('breaks from the loop if `fn` returns `false`', function(t) {
     var args = [];
-    var original = cellophane([1, 2, 3]);
-    var result = original.each(function(val, i, array) {
+    cellophane([1, 2, 3]).each(function(val, i, array) {
       args.push(clone([val, i, array]));
       if (val === 2) {
         return false;
@@ -48,11 +46,7 @@ test('each(fn)', function(t) {
       [1, 0, [1, 2, 3]],
       [2, 1, [1, 2, 3]]
     ]);
-    t.looseEqual(original.array, [1, 2, 3]);
-    t.equal(original, result);
     t.end();
   });
-
-  t.end();
 
 });

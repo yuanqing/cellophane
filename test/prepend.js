@@ -5,21 +5,33 @@ var cellophane = require('../');
 
 test('prepend(obj)', function(t) {
 
-  t.test('adds `obj` to the start of the array', function(t) {
-    var array = [{ foo: 1 }];
+  t.test('returns a copy', function(t) {
+    var x = { foo: 1 };
+    var y = { foo: 2 };
+    var array = [y];
     var original = cellophane(array);
-    var obj = { foo: 2 };
-    var result = original.prepend(obj);
-    t.looseEqual(result.array, [{ foo: 2 }, { foo: 1 }]);
-    t.looseEqual(original.array, [{ foo: 1 }]);
-    t.equal(result.array[0], obj);
-    t.equal(result.array[1], original.array[0]);
-    t.equal(original.array, array);
+    var result = original.prepend(x);
+    // original
+    t.looseEqual(original.array, [{ foo: 2 }]);
+    t.equal(original.array[0], y);
+    // result
+    t.looseEqual(result.array, [{ foo: 1 }, { foo: 2 }]);
+    t.equal(result.array[0], x);
+    t.equal(result.array[1], y);
+    // original !== result
     t.notEqual(original, result);
     t.notEqual(original.array, result.array);
     t.end();
   });
 
-  t.end();
+  t.test('empty array', function(t) {
+    t.looseEqual(cellophane().prepend(1).array, [1]);
+    t.end();
+  });
+
+  t.test('non-empty array', function(t) {
+    t.looseEqual(cellophane([2, 3]).prepend(1).array, [1, 2, 3]);
+    t.end();
+  });
 
 });

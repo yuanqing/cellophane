@@ -24,32 +24,30 @@ test('insert(obj, i)', function(t) {
     t.end();
   });
 
-  t.test('insert into empty array', function(t) {
-    var c = cellophane([]);
-    var x = 'foo';
-    t.looseEqual(c.insert(x, -2).array, [x, , ]);
-    t.looseEqual(c.insert(x, -1).array, [x, ]);
-    t.looseEqual(c.insert(x, 0).array, [x]);
-    t.looseEqual(c.insert(x, 1).array, [ , x]);
-    t.looseEqual(c.insert(x, 2).array, [ , , x]);
+  t.test('empty array', function(t) {
+    var c = cellophane();
+    t.looseEqual(c.insert('foo', -2).array, ['foo', , ]);
+    t.looseEqual(c.insert('foo', -1).array, ['foo', ]);
+    t.looseEqual(c.insert('foo', 0).array, ['foo']);
+    t.looseEqual(c.insert('foo', 1).array, [ , 'foo']);
+    t.looseEqual(c.insert('foo', 2).array, [ , , 'foo']);
     t.end();
   });
 
-  t.test('insert into non-empty array', function(t) {
+  t.test('non-empty array', function(t) {
     var c = cellophane([1, 2, 3]);
-    var x = 'foo';
-    t.looseEqual(c.insert(x, -6).array, [x, , , 1, 2, 3]);
-    t.looseEqual(c.insert(x, -5).array, [x, , 1, 2, 3]);
-    t.looseEqual(c.insert(x, -4).array, [x, 1, 2, 3]);
-    t.looseEqual(c.insert(x, -3).array, [1, x, 2, 3]);
-    t.looseEqual(c.insert(x, -2).array, [1, 2, x, 3]);
-    t.looseEqual(c.insert(x, -1).array, [1, 2, 3, x]);
-    t.looseEqual(c.insert(x, 0).array, [x, 1, 2, 3]);
-    t.looseEqual(c.insert(x, 1).array, [1, x, 2, 3]);
-    t.looseEqual(c.insert(x, 2).array, [1, 2, x, 3]);
-    t.looseEqual(c.insert(x, 3).array, [1, 2, 3, x]);
-    t.looseEqual(c.insert(x, 4).array, [1, 2, 3, , x]);
-    t.looseEqual(c.insert(x, 5).array, [1, 2, 3, , , x]);
+    t.looseEqual(c.insert('foo', -6).array, ['foo', , , 1, 2, 3]);
+    t.looseEqual(c.insert('foo', -5).array, ['foo', , 1, 2, 3]);
+    t.looseEqual(c.insert('foo', -4).array, ['foo', 1, 2, 3]);
+    t.looseEqual(c.insert('foo', -3).array, [1, 'foo', 2, 3]);
+    t.looseEqual(c.insert('foo', -2).array, [1, 2, 'foo', 3]);
+    t.looseEqual(c.insert('foo', -1).array, [1, 2, 3, 'foo']);
+    t.looseEqual(c.insert('foo', 0).array, ['foo', 1, 2, 3]);
+    t.looseEqual(c.insert('foo', 1).array, [1, 'foo', 2, 3]);
+    t.looseEqual(c.insert('foo', 2).array, [1, 2, 'foo', 3]);
+    t.looseEqual(c.insert('foo', 3).array, [1, 2, 3, 'foo']);
+    t.looseEqual(c.insert('foo', 4).array, [1, 2, 3, , 'foo']);
+    t.looseEqual(c.insert('foo', 5).array, [1, 2, 3, , , 'foo']);
     t.end();
   });
 

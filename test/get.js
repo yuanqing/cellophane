@@ -6,38 +6,29 @@ var cellophane = require('../');
 test('get(i)', function(t) {
 
   t.test('empty array', function(t) {
-    var array = [];
-    var original = cellophane(array);
-    t.equal(original.get(0), undefined);
-    t.looseEqual(original.array, []);
-    t.equal(original.array, array);
+    var c = cellophane();
+    t.looseEqual(c.get(-1), undefined);
+    t.looseEqual(c.get(0), undefined);
+    t.looseEqual(c.get(1), undefined);
     t.end();
   });
 
-  t.test('get from start of array', function(t) {
-    var array = [1, 2, 3];
-    var original = cellophane(array);
-    t.equal(original.get(0), 1);
-    t.equal(original.get(1), 2);
-    t.equal(original.get(2), 3);
-    t.equal(original.get(3), undefined);
-    t.looseEqual(original.array, [1, 2, 3]);
-    t.equal(original.array, array);
+  t.test('positive `i`', function(t) {
+    var c = cellophane([1, 2, 3]);
+    t.equal(c.get(0), 1);
+    t.equal(c.get(1), 2);
+    t.equal(c.get(2), 3);
+    t.equal(c.get(3), undefined);
     t.end();
   });
 
-  t.test('get from end of array', function(t) {
-    var array = [1, 2, 3];
-    var original = cellophane(array);
-    t.equal(original.get(-1), 3);
-    t.equal(original.get(-2), 2);
-    t.equal(original.get(-3), 1);
-    t.equal(original.get(-4), undefined);
-    t.looseEqual(original.array, [1, 2, 3]);
-    t.equal(original.array, array);
+  t.test('negative `i`', function(t) {
+    var c = cellophane([1, 2, 3]);
+    t.equal(c.get(-1), 3);
+    t.equal(c.get(-2), 2);
+    t.equal(c.get(-3), 1);
+    t.equal(c.get(-4), undefined);
     t.end();
   });
-
-  t.end();
 
 });

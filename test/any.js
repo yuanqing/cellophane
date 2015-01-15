@@ -8,24 +8,18 @@ test('any(fn)', function(t) {
 
   t.test('empty array', function(t) {
     var args = [];
-    var array = [];
-    var original = cellophane(array);
-    var result = original.any(function(val, i, array) {
+    var result = cellophane().any(function(val, i, array) {
       args.push(clone([val, i, array]));
       return val > 1;
     });
     t.looseEqual(args, []);
     t.equal(result, false);
-    t.looseEqual(original.array, []);
-    t.equal(original.array, array);
     t.end();
   });
 
   t.test('false result', function(t) {
     var args = [];
-    var array = [1, 2, 3];
-    var original = cellophane(array);
-    var result = original.any(function(val, i, array) {
+    var result = cellophane([1, 2, 3]).any(function(val, i, array) {
       args.push(clone([val, i, array]));
       return val > 3;
     });
@@ -35,16 +29,12 @@ test('any(fn)', function(t) {
       [3, 2, [1, 2, 3]]
     ]);
     t.equal(result, false);
-    t.looseEqual(original.array, [1, 2, 3]);
-    t.equal(original.array, array);
     t.end();
   });
 
   t.test('true result', function(t) {
     var args = [];
-    var array = [1, 2, 3];
-    var original = cellophane(array);
-    var result = original.any(function(val, i, array) {
+    var result = cellophane([1, 2, 3]).any(function(val, i, array) {
       args.push(clone([val, i, array]));
       return val > 1;
     });
@@ -53,99 +43,53 @@ test('any(fn)', function(t) {
       [2, 1, [1, 2, 3]]
     ]);
     t.equal(result, true);
-    t.looseEqual(original.array, [1, 2, 3]);
-    t.equal(original.array, array);
     t.end();
   });
-
-  t.end();
 
 });
 
 test('any(op, val)', function(t) {
 
   t.test('empty array', function(t) {
-    var array = [];
-    var original = cellophane(array);
-    var result = original.any('>', 1);
-    t.equal(result, false);
-    t.looseEqual(original.array, []);
-    t.equal(original.array, array);
+    t.equal(cellophane().any('>', 1), false);
     t.end();
   });
 
   t.test('false result', function(t) {
-    var array = [1, 2, 3];
-    var original = cellophane(array);
-    var result = original.any('>', 3);
-    t.equal(result, false);
-    t.looseEqual(original.array, [1, 2, 3]);
-    t.equal(original.array, array);
+    t.equal(cellophane([1, 2, 3]).any('>', 3), false);
     t.end();
   });
 
   t.test('true result', function(t) {
-    var array = [1, 2, 3];
-    var original = cellophane(array);
-    var result = original.any('>', 1);
-    t.equal(result, true);
-    t.looseEqual(original.array, [1, 2, 3]);
-    t.equal(original.array, array);
+    t.equal(cellophane([1, 2, 3]).any('>', 1), true);
     t.end();
   });
-
-  t.end();
 
 });
 
 test('any(key, op, val)', function(t) {
 
   t.test('empty array', function(t) {
-    var array = [];
-    var original = cellophane(array);
-    var result = original.any('foo.bar', '>', 1);
-    t.equal(result, false);
-    t.looseEqual(original.array, []);
-    t.equal(original.array, array);
+    t.equal(cellophane().any('foo.bar', '>', 1), false);
     t.end();
   });
 
   t.test('false result', function(t) {
-    var array = [
+    t.equal(cellophane([
       { foo: { bar: 1 } },
       { foo: { bar: 2 } },
       { foo: { bar: 3 } }
-    ];
-    var original = cellophane(array);
-    var result = original.any('foo.bar', '>', 3);
-    t.equal(result, false);
-    t.looseEqual(original.array, [
-      { foo: { bar: 1 } },
-      { foo: { bar: 2 } },
-      { foo: { bar: 3 } }
-    ]);
-    t.equal(original.array, array);
+    ]).any('foo.bar', '>', 3), false);
     t.end();
   });
 
   t.test('true result', function(t) {
-    var array = [
+    t.equal(cellophane([
       { foo: { bar: 1 } },
       { foo: { bar: 2 } },
       { foo: { bar: 3 } }
-    ];
-    var original = cellophane(array);
-    var result = original.any('foo.bar', '>', 1);
-    t.equal(result, true);
-    t.looseEqual(original.array, [
-      { foo: { bar: 1 } },
-      { foo: { bar: 2 } },
-      { foo: { bar: 3 } }
-    ]);
-    t.equal(original.array, array);
+    ]).any('foo.bar', '>', 1), true);
     t.end();
   });
-
-  t.end();
 
 });
