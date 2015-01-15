@@ -6,6 +6,7 @@ var versus = require('versus');
 var isArray = require('cheque').isArray;
 
 var Cellophane = function(array) {
+  array = array || [];
   if (!isArray(array)) {
     throw new Error('need an array');
   }
