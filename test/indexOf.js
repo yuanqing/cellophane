@@ -10,6 +10,17 @@ test('indexOf(obj, opts)', function(t) {
     t.end();
   });
 
+  t.test('returns the index of the first instance of `obj` in the array', function(t) {
+    var c = cellophane([
+      { foo: 1 },
+      { foo: 2 },
+      { foo: 2 },
+      { foo: 3 }
+    ]);
+    t.equal(c.indexOf({ foo: 2 }), 1);
+    t.end();
+  });
+
   t.test('defaults to comparing by object value', function(t) {
     var c = cellophane([
       { foo: 1 },

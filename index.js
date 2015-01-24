@@ -17,8 +17,9 @@ var Cellophane = function(array) {
 };
 
 var indexOf = function(array, obj) {
-  var i = array.length;
-  while (i--) {
+  var i = -1;
+  var len = array.length;
+  while (++i < len) {
     if (deepEqual(array[i], obj, { strict: true })) {
       return i;
     }
@@ -27,8 +28,9 @@ var indexOf = function(array, obj) {
 };
 
 var indexOfStrict = function(array, obj) {
-  var i = array.length;
-  while (i--) {
+  var i = -1;
+  var len = array.length;
+  while (++i < len) {
     if (array[i] === obj) {
       return i;
     }
