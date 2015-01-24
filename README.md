@@ -321,14 +321,17 @@ c.get(-3); //=> 1
 
 ### .indexOf(obj [, opts])
 
-Returns the index of `obj` in the array, with objects [compared by value](#compare-by-value). For strict comparison, set `opts.strict` to `true`. Returns `-1` if `obj` is not found in the array.
+Returns the index of the first instance of `obj` in the array, with objects [compared by value](#compare-by-value). For strict comparison, set `opts.strict` to `true`. Returns `-1` if `obj` is not found in the array.
 
 ```js
 var c = cellophane([
   { foo: 1 },
   { foo: 2 },
+  { foo: 2 },
   { foo: 3 }
 ]);
+
+c.indexOf({ foo: 2 }); //=> 1
 
 c.indexOf({ foo: 3 }); //=> 2
 c.indexOf({ foo: 3 }, { strict: true }); //=> -1
