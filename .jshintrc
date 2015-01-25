@@ -14,5 +14,6 @@
   "quotmark": true,
   "undef": true,
   "unused": true,
-  "eqnull": true
+  "eqnull": true,
+  "elision": true
 }
