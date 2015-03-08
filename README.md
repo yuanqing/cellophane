@@ -1,4 +1,4 @@
-# cellophane.js [![npm Version](http://img.shields.io/npm/v/cellophane.svg?style=flat)](https://www.npmjs.org/package/cellophane) [![Build Status](https://img.shields.io/travis/yuanqing/cellophane.svg?branch=master&style=flat)](https://travis-ci.org/yuanqing/cellophane) [![Coverage Status](https://img.shields.io/coveralls/yuanqing/cellophane.svg?style=flat)](https://coveralls.io/r/yuanqing/cellophane)
+# cellophane.js [![npm Version](http://img.shields.io/npm/v/cellophane.svg?style=flat)](https://npmjs.org/package/cellophane) [![Build Status](https://img.shields.io/travis/yuanqing/cellophane.svg?branch=master&style=flat)](https://travis-ci.org/yuanqing/cellophane) [![Coverage Status](https://img.shields.io/coveralls/yuanqing/cellophane.svg?style=flat)](https://coveralls.io/r/yuanqing/cellophane)
 
 > A lightweight wrapper around the array.
 
